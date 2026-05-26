@@ -275,23 +275,47 @@ export default function About() {
             animate={show}
             className="mb-10"
           >
-            <div className="relative" style={{ width: '320px' }}>
-              {/* Decoration line behind photo */}
-              <div className="absolute -right-3 -bottom-3 border-2 border-gold/30 pointer-events-none" style={{ width: '320px', height: '400px' }} />
+            <div className="relative" style={{ width: '260px' }}>
+              {/* Gold decoration behind photo */}
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  width: '260px',
+                  height: '320px',
+                  border: '2px solid #C9A84C',
+                  opacity: 0.25,
+                  top: '12px',
+                  left: '12px',
+                  zIndex: 0,
+                }}
+              />
 
               {/* Photo container */}
               <motion.div
-                className="relative overflow-hidden border-r-2 border-b-2 border-gold group"
-                style={{ width: '320px', height: '400px', maxWidth: '320px' }}
+                className="relative border-r-2 border-b-2 border-gold"
+                style={{
+                  width: '260px',
+                  height: '320px',
+                  overflow: 'hidden',
+                  flexShrink: 0,
+                  position: 'relative',
+                  zIndex: 1,
+                }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://res.cloudinary.com/dxenbzden/image/upload/v1779783153/profile_twpkgt.png"
+                  src="https://res.cloudinary.com/dxenbzden/image/upload/w_260,h_320,c_fill,g_face,q_auto,f_auto/v1779783153/profile_twpkgt.png"
                   alt="Akshat Tiwari"
                   loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 10%',
+                  }}
                 />
               </motion.div>
             </div>
