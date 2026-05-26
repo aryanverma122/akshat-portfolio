@@ -238,17 +238,7 @@ function CarouselCard({
         </div>
       </div>
 
-      {/* Caption block */}
-      <div className="mt-5 px-1">
-        <p className="font-syne font-semibold text-lg text-foreground tracking-wide">
-          {video.title}
-        </p>
-        {video.caption && (
-          <p className="font-inter text-sm text-foreground/45 mt-1.5 leading-relaxed max-w-2xl">
-            {video.caption}
-          </p>
-        )}
-      </div>
+      {/* No title or caption below video */}
     </motion.div>
   );
 }

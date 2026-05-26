@@ -16,7 +16,7 @@
 /* ─── Base ──────────────────────────────────────────────────── */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth removed — Lenis handles this */
   }
 
   body {

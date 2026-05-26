@@ -138,14 +138,7 @@ export default function WorkPreview() {
                                 </div>
                             </div>
 
-                            {/* Caption only — title removed */}
-                            <div className="mt-4">
-                                {project.caption && (
-                                    <p className="font-inter text-sm text-foreground/60 mt-2">
-                                        {project.caption}
-                                    </p>
-                                )}
-                            </div>
+                            {/* No title or caption below video */}
                         </motion.div>
                     </AnimatePresence>
                 </div>

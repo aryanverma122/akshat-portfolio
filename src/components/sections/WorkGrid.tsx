@@ -171,17 +171,10 @@ function VideoCard({ project, index, onClick }: { project: Project; index: numbe
                 )}
             </div>
 
-            {/* Caption only — title removed */}
-            <div className="mt-3 px-0.5">
-                {project.caption && (
-                    <p className="font-inter text-sm text-foreground/60 mt-1 truncate">
-                        {project.caption}
-                    </p>
-                )}
-
-                {/* Skill tags — visible on hover */}
+            {/* Skill tags — hover overlay only, no text below video */}
+            <div className="mt-2 px-0.5 h-0 overflow-visible">
                 <motion.div
-                    className="flex flex-wrap gap-2 mt-3"
+                    className="flex flex-wrap gap-2"
                     initial={{ opacity: 0, y: 4 }}
                     whileHover={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
