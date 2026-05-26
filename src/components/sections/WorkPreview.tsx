@@ -7,6 +7,14 @@ import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
+/* ─── Category display names ────────────────────────────────── */
+const CATEGORY_LABELS: Record<string, string> = {
+    all: "All",
+    ai: "AI Visualisation",
+    edited: "Editor's Vision",
+    motion: "Motion Art",
+};
+
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 32 },
     visible: (delay = 0) => ({
@@ -66,35 +74,33 @@ export default function WorkPreview() {
 
     return (
         <section className="relative bg-[#0A0A0A] py-28 px-6 md:px-16 lg:px-24 border-t border-[#1a1a1a]">
-            {/* Label */}
-            <motion.p
-                className="font-inter text-xs tracking-[0.3em] text-gold uppercase mb-5"
+            {/* Heading */}
+            <motion.h2
+                className="font-heading font-bold text-5xl md:text-6xl text-foreground leading-none mb-2"
                 variants={fadeUp}
                 custom={0}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
             >
-                — SELECTED WORK —
-            </motion.p>
-
-            {/* Heading */}
-            <motion.h2
-                className="font-heading font-bold text-5xl md:text-6xl text-foreground leading-none mb-12"
-                variants={fadeUp}
-                custom={0.1}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-            >
-                SELECTED WORK
+                WORK
             </motion.h2>
+
+            {/* Gold underline */}
+            <motion.div
+                className="h-0.5 bg-gold mb-12"
+                style={{ width: 60 }}
+                initial={{ scaleX: 0, originX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            />
 
             {/* Slider Container */}
             <motion.div
                 className="mb-8"
                 variants={fadeUp}
-                custom={0.2}
+                custom={0.1}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
@@ -134,7 +140,7 @@ export default function WorkPreview() {
                                 {/* Category badge */}
                                 <div className="absolute top-3 left-3">
                                     <span className="font-mono text-[9px] uppercase tracking-widest text-black bg-gold px-2 py-0.5">
-                                        {project.category}
+                                        {CATEGORY_LABELS[project.category] ?? project.category}
                                     </span>
                                 </div>
                             </div>
@@ -191,7 +197,7 @@ export default function WorkPreview() {
             {/* CTA Button */}
             <motion.div
                 variants={fadeUp}
-                custom={0.3}
+                custom={0.2}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}

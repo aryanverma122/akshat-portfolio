@@ -288,7 +288,7 @@ export default function About() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png"
+                  src="https://res.cloudinary.com/dxenbzden/image/upload/v1779783153/profile_twpkgt.png"
                   alt="Akshat Tiwari"
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}

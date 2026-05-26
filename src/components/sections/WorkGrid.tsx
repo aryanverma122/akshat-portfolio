@@ -6,10 +6,16 @@ import { X, Play } from "lucide-react";
 import { type Project, type Category, categories } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-/* ─── Ease ──────────────────────────────────────────────────── */
+/* ─── Category display names ────────────────────────────────── */
+const CATEGORY_LABELS: Record<string, string> = {
+    all: "All",
+    ai: "AI Visualisation",
+    edited: "Editor's Vision",
+    motion: "Motion Art",
+};
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-/* ─── Card slide variants — flat, no 3D ────────────────────── */
+/* ─── Ease ──────────────────────────────────────────────────── */
 const cardVariants = {
     hidden: { opacity: 0, x: 40 },
     visible: (i: number) => ({
@@ -66,7 +72,7 @@ function Lightbox({ project, onClose }: { project: Project; onClose: () => void 
                         {project.title}
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/30 border border-[#2A2A2A] px-2 py-0.5">
-                        {project.category}
+                        {CATEGORY_LABELS[project.category] ?? project.category}
                     </span>
                 </div>
 
@@ -159,7 +165,7 @@ function VideoCard({ project, index, onClick }: { project: Project; index: numbe
                 {/* Category badge */}
                 <div className="absolute top-3 left-3">
                     <span className="font-mono text-[9px] uppercase tracking-widest text-black bg-gold px-2 py-0.5">
-                        {project.category}
+                        {CATEGORY_LABELS[project.category] ?? project.category}
                     </span>
                 </div>
 
@@ -294,7 +300,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
                     {categories.map((cat) => (
                         <FilterPill
                             key={cat}
-                            label={cat}
+                            label={CATEGORY_LABELS[cat] ?? cat}
                             count={countFor(cat)}
                             active={activeCategory === cat}
                             onClick={() => setActiveCategory(cat)}

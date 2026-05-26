@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Akshat Tiwari Portfolio",
     images: [
       {
-        url: "https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png",
+        url: "https://res.cloudinary.com/dxenbzden/image/upload/v1779783153/profile_twpkgt.png",
         width: 800,
         height: 1000,
         alt: "Akshat Tiwari — Video Editor",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Akshat Tiwari — Video Editor",
     description: "Enthusiastic video editor turning imaginations into visuals that feel real.",
-    images: ["https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png"],
+    images: ["https://res.cloudinary.com/dxenbzden/image/upload/v1779783153/profile_twpkgt.png"],
   },
 };
 

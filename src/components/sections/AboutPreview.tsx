@@ -61,7 +61,7 @@ export default function AboutPreview() {
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src="https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png"
+                                src="https://res.cloudinary.com/dxenbzden/image/upload/v1779783153/profile_twpkgt.png"
                                 alt="Akshat Tiwari"
                                 loading="lazy"
                                 className="w-full h-full object-cover object-top"

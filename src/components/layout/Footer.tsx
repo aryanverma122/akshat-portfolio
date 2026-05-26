@@ -32,14 +32,6 @@ function LinkedinIcon({ size = 20, className = "" }: { size?: number; className?
 }
 
 export default function Footer() {
-    const quickLinks = [
-        { label: "Home", href: "/" },
-        { label: "Work", href: "/work" },
-        { label: "About", href: "/about" },
-        { label: "Services", href: "/services" },
-        { label: "Contact", href: "/contact" },
-    ];
-
     const services = [
         "AI Video Editing",
         "Video Editing",
@@ -52,8 +44,8 @@ export default function Footer() {
         <footer className="bg-[#080808]">
             {/* Main footer content */}
             <div className="pt-16 px-6 md:px-16 lg:px-24">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                    {/* Left column */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                    {/* Left column — logo + tagline + social */}
                     <motion.div
                         variants={fadeUp}
                         custom={0}
@@ -97,36 +89,10 @@ export default function Footer() {
                         </div>
                     </motion.div>
 
-                    {/* Middle column */}
+                    {/* Right column — services */}
                     <motion.div
                         variants={fadeUp}
                         custom={0.1}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        <p className="font-inter text-xs uppercase tracking-widest text-foreground/50 mb-6">
-                            Quick Links
-                        </p>
-                        <nav className="space-y-3">
-                            {quickLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className="font-inter text-sm text-foreground hover:text-gold transition-all duration-200 inline-flex items-center group"
-                                >
-                                    <span className="group-hover:translate-x-1 transition-transform duration-200">
-                                        {link.label}
-                                    </span>
-                                </Link>
-                            ))}
-                        </nav>
-                    </motion.div>
-
-                    {/* Right column */}
-                    <motion.div
-                        variants={fadeUp}
-                        custom={0.2}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
