@@ -251,15 +251,17 @@ function SectionHeader({ label, heading, description }: {
 }) {
   return (
     <div>
-      <motion.p
-        className="font-inter text-xs tracking-[0.3em] text-gold uppercase mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5 }}
-      >
-        {label}
-      </motion.p>
+      {label && (
+        <motion.p
+          className="font-inter text-xs tracking-[0.3em] text-gold uppercase mb-4"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+        >
+          {label}
+        </motion.p>
+      )}
 
       <h2 className="font-syne font-extrabold text-5xl md:text-6xl text-foreground leading-none">
         <motion.span
@@ -284,15 +286,17 @@ function SectionHeader({ label, heading, description }: {
         />
       </h2>
 
-      <motion.p
-        className="font-inter text-sm text-foreground/40 mt-4 max-w-lg"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        {description}
-      </motion.p>
+      {description && (
+        <motion.p
+          className="font-inter text-sm text-foreground/40 mt-4 max-w-lg"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          {description}
+        </motion.p>
+      )}
     </div>
   );
 }

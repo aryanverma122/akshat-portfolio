@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { Play, ChevronLeft, ChevronRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { Play } from "lucide-react";
+import { projects, type Project, type Category, categories } from "@/data/projects";
 import { cn } from "@/lib/utils";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 /* ─── Category display names ────────────────────────────────── */
 const CATEGORY_LABELS: Record<string, string> = {
@@ -20,57 +22,103 @@ const fadeUp: Variants = {
     visible: (delay = 0) => ({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
+        transition: { duration: 0.65, ease: EASE, delay },
     }),
 };
 
-const slideVariants: Variants = {
-    enter: (direction: number) => ({
-        x: direction > 0 ? "100%" : "-100%",
-        opacity: 0,
-        scale: 0.95,
-    }),
-    center: {
-        x: 0,
+const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: (i: number) => ({
         opacity: 1,
-        scale: 1,
-        transition: {
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-            scale: { duration: 0.3 },
-        },
-    },
-    exit: (direction: number) => ({
-        x: direction > 0 ? "-100%" : "100%",
-        opacity: 0,
-        scale: 0.95,
-        transition: {
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.15 },
-        },
+        y: 0,
+        transition: { duration: 0.4, ease: EASE, delay: i * 0.06 },
     }),
 };
 
+/* ─── Thumbnail card ────────────────────────────────────────── */
+function ThumbCard({ project, index }: { project: Project; index: number }) {
+    const [imgError, setImgError] = useState(false);
+
+    return (
+        <motion.div
+            variants={cardVariants}
+            custom={index}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            className="group relative cursor-pointer aspect-video overflow-hidden border border-[#2A2A2A] bg-[#111] hover:border-gold transition-colors duration-200"
+        >
+            {!imgError ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    onError={() => setImgError(true)}
+                />
+            ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] flex items-center justify-center">
+                    <Play size={24} className="text-gold/20" />
+                </div>
+            )}
+
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/30 transition-all duration-300" />
+
+            {/* Play button on hover */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div className="w-12 h-12 rounded-full border-2 border-gold bg-black/60 backdrop-blur-sm flex items-center justify-center">
+                    <Play size={16} className="text-gold fill-gold ml-0.5" />
+                </div>
+            </div>
+
+            {/* Category badge */}
+            <div className="absolute top-2 left-2">
+                <span className="font-mono text-[8px] uppercase tracking-widest text-black bg-gold px-2 py-0.5">
+                    {CATEGORY_LABELS[project.category] ?? project.category}
+                </span>
+            </div>
+        </motion.div>
+    );
+}
+
+/* ─── Filter pill ───────────────────────────────────────────── */
+function FilterPill({
+    label,
+    active,
+    onClick,
+}: {
+    label: string;
+    active: boolean;
+    onClick: () => void;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={cn(
+                "font-heading font-medium text-xs uppercase tracking-wider px-4 py-2 transition-all duration-200",
+                active
+                    ? "bg-gold text-black"
+                    : "text-foreground/50 border border-[#2A2A2A] hover:border-gold/60 hover:text-foreground"
+            )}
+        >
+            {label}
+        </button>
+    );
+}
+
+/* ─── WorkPreview ───────────────────────────────────────────── */
 export default function WorkPreview() {
-    // Get featured projects (id: 1, 11, 17 + 3 more featured ones)
-    const featuredIds = [1, 11, 17, 2, 12, 18];
-    const featured = projects.filter((p) => featuredIds.includes(p.id));
+    const [activeCategory, setActiveCategory] = useState<Category>("all");
 
-    const [current, setCurrent] = useState(0);
-    const [direction, setDirection] = useState(0);
+    const filtered =
+        activeCategory === "all"
+            ? projects
+            : projects.filter((p) => p.category === activeCategory);
 
-    const paginate = (newDirection: number) => {
-        setDirection(newDirection);
-        setCurrent((prev) => {
-            let next = prev + newDirection;
-            if (next < 0) next = featured.length - 1;
-            if (next >= featured.length) next = 0;
-            return next;
-        });
-    };
-
-    const project = featured[current];
-    const progress = ((current + 1) / featured.length) * 100;
+    // Show max 6 on homepage
+    const preview = filtered.slice(0, 6);
 
     return (
         <section className="relative bg-[#0A0A0A] py-28 px-6 md:px-16 lg:px-24 border-t border-[#1a1a1a]">
@@ -88,113 +136,50 @@ export default function WorkPreview() {
 
             {/* Gold underline */}
             <motion.div
-                className="h-0.5 bg-gold mb-12"
+                className="h-0.5 bg-gold mb-8"
                 style={{ width: 60 }}
                 initial={{ scaleX: 0, originX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
             />
 
-            {/* Slider Container */}
+            {/* Category filter tabs */}
             <motion.div
-                className="mb-8"
+                className="flex flex-wrap gap-2 mb-10"
                 variants={fadeUp}
-                custom={0.1}
+                custom={0.15}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
             >
-                {/* Slide Wrapper - overflow hidden for clean transitions */}
-                <div className="relative overflow-hidden">
-                    <AnimatePresence mode="wait" custom={direction}>
-                        <motion.div
-                            key={current}
-                            custom={direction}
-                            variants={slideVariants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            className="w-full"
-                        >
-                            {/* Thumbnail */}
-                            <div className="relative aspect-video overflow-hidden border border-[#2A2A2A] bg-[#111] group hover:border-gold transition-colors duration-200">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={project.thumbnail}
-                                    alt={project.title}
-                                    loading="lazy"
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-                                />
-
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent hover:from-black/40 transition-all duration-300" />
-
-                                {/* Play button */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-                                    <div className="w-14 h-14 rounded-full border-2 border-gold bg-black/60 backdrop-blur-sm flex items-center justify-center">
-                                        <Play size={18} className="text-gold fill-gold ml-0.5" />
-                                    </div>
-                                </div>
-
-                                {/* Category badge */}
-                                <div className="absolute top-3 left-3">
-                                    <span className="font-mono text-[9px] uppercase tracking-widest text-black bg-gold px-2 py-0.5">
-                                        {CATEGORY_LABELS[project.category] ?? project.category}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* No title or caption below video */}
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mt-6 h-0.5 w-full bg-[#1A1A1A] overflow-hidden">
-                    <motion.div
-                        className="h-full bg-gold"
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                {categories.map((cat) => (
+                    <FilterPill
+                        key={cat}
+                        label={CATEGORY_LABELS[cat] ?? cat}
+                        active={activeCategory === cat}
+                        onClick={() => setActiveCategory(cat)}
                     />
-                </div>
-
-                {/* Controls */}
-                <div className="mt-8 flex items-center justify-center gap-4">
-                    {/* Prev Button */}
-                    <motion.button
-                        onClick={() => paginate(-1)}
-                        className="w-12 h-12 rounded-none border border-[#2A2A2A] bg-[#111111] flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <ChevronLeft size={20} />
-                    </motion.button>
-
-                    {/* Counter */}
-                    <div className="flex items-center gap-2 min-w-[60px] justify-center">
-                        <span className="font-heading font-bold text-sm text-gold">
-                            {String(current + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-inter text-sm text-foreground/40">/</span>
-                        <span className="font-inter text-sm text-foreground/40">
-                            {String(featured.length).padStart(2, "0")}
-                        </span>
-                    </div>
-
-                    {/* Next Button */}
-                    <motion.button
-                        onClick={() => paginate(1)}
-                        className="w-12 h-12 rounded-none border border-[#2A2A2A] bg-[#111111] flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <ChevronRight size={20} />
-                    </motion.button>
-                </div>
+                ))}
             </motion.div>
 
-            {/* CTA Button */}
+            {/* 3-column thumbnail grid */}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeCategory}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                >
+                    {preview.map((project, i) => (
+                        <ThumbCard key={project.id} project={project} index={i} />
+                    ))}
+                </motion.div>
+            </AnimatePresence>
+
+            {/* CTA */}
             <motion.div
                 variants={fadeUp}
                 custom={0.2}

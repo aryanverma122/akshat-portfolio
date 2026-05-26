@@ -23,25 +23,25 @@ export default function Showreel() {
     <>
       <VideoGrid
         sectionId="ai-videos"
-        label="— AI GENERATED & EDITED —"
-        heading="AI EDITS"
-        description="A collection of AI-assisted cinematic edits crafted using generative tools, Premiere Pro, and After Effects."
+        label="— AI VISUALISATION —"
+        heading="AI Visualisation"
+        description=""
         videos={AI_VIDEOS}
       />
 
       <VideoGrid
         sectionId="edited-videos"
-        label="— EDITED VIDEOS —"
-        heading="EDITS"
-        description="Brand reels, short films, and commercial cuts — raw footage transformed into visual stories."
+        label="— EDITOR'S VISION —"
+        heading="Editor's Vision"
+        description=""
         videos={EDITED_VIDEOS}
       />
 
       <VideoGrid
         sectionId="motion-graphics"
-        label="— MOTION GRAPHICS —"
-        heading="MOTION"
-        description="Kinetic typography, animated titles, and motion design work built in After Effects."
+        label="— MOTION ART —"
+        heading="Motion Art"
+        description=""
         videos={MOTION_VIDEOS}
       />
     </>
