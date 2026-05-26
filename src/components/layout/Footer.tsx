@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -32,97 +31,62 @@ function LinkedinIcon({ size = 20, className = "" }: { size?: number; className?
 }
 
 export default function Footer() {
-    const services = [
-        "AI Video Editing",
-        "Video Editing",
-        "Motion Graphics",
-        "Color Grading",
-        "Full Package",
-    ];
-
     return (
         <footer className="bg-[#080808]">
-            {/* Main footer content */}
-            <div className="pt-16 px-6 md:px-16 lg:px-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-                    {/* Left column — logo + tagline + social */}
-                    <motion.div
-                        variants={fadeUp}
-                        custom={0}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        <h3 className="font-heading font-bold text-2xl text-gold mb-2">AKSHAT</h3>
-                        <p className="font-inter text-sm text-foreground/50 mb-6">
-                            Crafting stories frame by frame
-                        </p>
+            <div className="pt-16 pb-0 px-6 md:px-16 lg:px-24">
 
-                        {/* Social links */}
-                        <div className="flex flex-col gap-3">
-                            <a
-                                href="https://www.instagram.com/akshat_tiwari08/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-[10px] text-foreground/70 hover:text-gold transition-all duration-200 group"
-                                aria-label="Instagram"
-                            >
-                                <InstagramIcon
-                                    size={20}
-                                    className="text-gold transition-transform duration-200 group-hover:scale-110 shrink-0"
-                                />
-                                <span className="font-inter text-sm">@akshat_tiwari08</span>
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/tiwariakshatofficial/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-[10px] text-foreground/70 hover:text-gold transition-all duration-200 group"
-                                aria-label="LinkedIn"
-                            >
-                                <LinkedinIcon
-                                    size={20}
-                                    className="text-gold transition-transform duration-200 group-hover:scale-110 shrink-0"
-                                />
-                                <span className="font-inter text-sm">Akshat Tiwari</span>
-                            </a>
-                        </div>
-                    </motion.div>
+                {/* Left side — logo + tagline + social */}
+                <motion.div
+                    variants={fadeUp}
+                    custom={0}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="max-w-sm"
+                >
+                    <h3 className="font-heading font-bold text-2xl text-gold mb-3">AKSHAT</h3>
+                    <p className="font-inter text-sm text-foreground/50 mb-6 leading-relaxed">
+                        Enthusiastic video editor turning imaginations into visuals that feel real
+                    </p>
 
-                    {/* Right column — services */}
-                    <motion.div
-                        variants={fadeUp}
-                        custom={0.1}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        <p className="font-inter text-xs uppercase tracking-widest text-foreground/50 mb-6">
-                            Services
-                        </p>
-                        <nav className="space-y-3">
-                            {services.map((service) => (
-                                <Link
-                                    key={service}
-                                    href="/services"
-                                    className="font-inter text-sm text-foreground hover:text-gold transition-all duration-200 inline-flex items-center group"
-                                >
-                                    <span className="group-hover:translate-x-1 transition-transform duration-200">
-                                        {service}
-                                    </span>
-                                </Link>
-                            ))}
-                        </nav>
-                    </motion.div>
-                </div>
+                    {/* Social links */}
+                    <div className="flex flex-col gap-3">
+                        <a
+                            href="https://www.instagram.com/akshat_tiwari08/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-[10px] text-foreground/70 hover:text-gold transition-all duration-200 group"
+                            aria-label="Instagram"
+                        >
+                            <InstagramIcon
+                                size={20}
+                                className="text-gold transition-transform duration-200 group-hover:scale-110 shrink-0"
+                            />
+                            <span className="font-inter text-sm">@akshat_tiwari08</span>
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/tiwariakshatofficial/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-[10px] text-foreground/70 hover:text-gold transition-all duration-200 group"
+                            aria-label="LinkedIn"
+                        >
+                            <LinkedinIcon
+                                size={20}
+                                className="text-gold transition-transform duration-200 group-hover:scale-110 shrink-0"
+                            />
+                            <span className="font-inter text-sm">Akshat Tiwari</span>
+                        </a>
+                    </div>
+                </motion.div>
 
                 {/* Bottom bar */}
-                <div className="border-t border-[#2A2A2A] py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="border-t border-[#2A2A2A] mt-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="font-inter text-xs text-foreground/40">
                         © {new Date().getFullYear()} Akshat Tiwari. All rights reserved.
                     </p>
                     <p className="font-inter text-xs text-foreground/40">
-                        Made with ❤️ in Kanpur
+                        Made with ❤️ in New Delhi
                     </p>
                 </div>
             </div>
