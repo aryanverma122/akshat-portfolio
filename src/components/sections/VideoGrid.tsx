@@ -134,6 +134,7 @@ function Lightbox({
             className="absolute inset-0 w-full h-full"
             allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
             allowFullScreen
+            loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
             title={video.title}
           />
@@ -213,6 +214,7 @@ function CarouselCard({
           <img
             src={thumb}
             alt={video.title}
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             onError={() => setImgError(true)}
           />

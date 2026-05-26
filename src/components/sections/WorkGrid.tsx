@@ -77,6 +77,7 @@ function Lightbox({ project, onClose }: { project: Project; onClose: () => void 
                         className="absolute inset-0 w-full h-full border-0"
                         allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
                         allowFullScreen
+                        loading="lazy"
                         referrerPolicy="strict-origin-when-cross-origin"
                         title={project.title}
                     />
@@ -130,6 +131,7 @@ function VideoCard({ project, index, onClick }: { project: Project; index: numbe
                     <img
                         src={project.thumbnail}
                         alt={project.title}
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         onError={() => setImgError(true)}
                     />

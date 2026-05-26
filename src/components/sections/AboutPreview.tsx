@@ -63,6 +63,7 @@ export default function AboutPreview() {
                             <img
                                 src="https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png"
                                 alt="Akshat Tiwari"
+                                loading="lazy"
                                 className="w-full h-full object-cover object-top"
                             />
                         </motion.div>
@@ -78,13 +79,13 @@ export default function AboutPreview() {
                     viewport={{ once: true, margin: "-60px" }}
                 >
                     <h2 className="font-heading font-bold text-4xl md:text-5xl text-foreground leading-tight mb-6">
-                        Junior Video Editor at Ritz Media World
+                        Enthusiastic video editor turning imaginations into visuals that feel real
                     </h2>
 
                     <p className="font-inter text-base text-foreground/70 leading-relaxed mb-8">
                         I craft cinematic edits, AI videos, and visual stories that connect with audiences.
-                        Skilled in Adobe Premiere Pro, After Effects, and Photoshop, I bring technical precision
-                        and creative instinct to every frame.
+                        Armed with Premiere Pro, After Effects and cutting-edge AI tools like Kling AI and Veo —
+                        I don&apos;t just edit videos, I craft experiences.
                     </p>
 
                     {/* Stats */}

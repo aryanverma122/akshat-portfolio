@@ -8,7 +8,6 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import PageTransition from "@/components/layout/PageTransition";
 
 // Client-only components
-const LoadingScreen = dynamic(() => import('@/components/layout/LoadingScreen'), { ssr: false });
 const ScrollToTop = dynamic(() => import('@/components/layout/ScrollToTop'), { ssr: false });
 
 const dmSans = DM_Sans({
@@ -76,7 +75,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${inter.variable}`}>
       <body className="bg-background text-foreground font-inter antialiased">
-        <LoadingScreen />
         <SmoothScroll>
           <PageTransition>
             <LayoutShell>{children}</LayoutShell>

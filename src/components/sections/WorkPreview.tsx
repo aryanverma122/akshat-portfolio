@@ -117,6 +117,7 @@ export default function WorkPreview() {
                                 <img
                                     src={project.thumbnail}
                                     alt={project.title}
+                                    loading="lazy"
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                                 />
 
