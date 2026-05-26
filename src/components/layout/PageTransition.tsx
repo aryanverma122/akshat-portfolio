@@ -1,50 +1,30 @@
 "use client";
 
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
-const CINEMATIC_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const variants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: CINEMATIC_EASE,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    transition: {
-      duration: 0.3,
-      ease: "easeIn",
-    },
-  },
+const variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 interface PageTransitionProps {
   children: React.ReactNode;
-  routeKey: string;
 }
 
-export default function PageTransition({
-  children,
-  routeKey,
-}: PageTransitionProps) {
+export default function PageTransition({ children }: PageTransitionProps) {
+  const pathname = usePathname();
+
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="wait">
       <motion.div
-        key={routeKey}
+        key={pathname}
         variants={variants}
         initial="initial"
-        animate="enter"
+        animate="animate"
         exit="exit"
-        style={{ position: "relative", zIndex: 0 }}
+        transition={{ duration: 0.3 }}
       >
         {children}
       </motion.div>

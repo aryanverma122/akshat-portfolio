@@ -30,16 +30,19 @@ const services = [
         icon: Film,
         title: "Video Editing",
         description: "Premiere Pro",
+        tools: null,
     },
     {
         icon: Sparkles,
         title: "AI Video Production",
-        description: "After Effects",
+        description: "Creating next-gen AI videos using Kling AI, Veo and Seadance — blending AI generation with professional editing in After Effects",
+        tools: ["Kling AI", "Veo", "Seadance", "After Effects"],
     },
     {
         icon: Palette,
         title: "Motion Graphics",
         description: "After Effects",
+        tools: null,
     },
 ];
 
@@ -93,6 +96,18 @@ export default function ServicesPreview() {
                             <p className="font-inter text-sm text-foreground/60">
                                 {service.description}
                             </p>
+                            {service.tools && (
+                                <div className="flex flex-wrap gap-2 mt-3">
+                                    {service.tools.map((tool) => (
+                                        <span
+                                            key={tool}
+                                            className="font-inter text-xs text-gold border border-gold px-2 py-0.5 rounded-sm"
+                                        >
+                                            {tool}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </motion.div>
                     );
                 })}

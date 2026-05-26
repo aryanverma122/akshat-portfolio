@@ -54,8 +54,8 @@ const SKILLS = [
   { label: "Video Storytelling", value: 95 },
 ];
 
-const BIO_P1 = "I'm Akshat Tiwari, a Junior Video Editor at Ritz Media World, Noida. I craft cinematic edits, AI videos, brand reels and visual stories that connect with audiences.";
-const BIO_P2 = "Skilled in Adobe Premiere Pro, After Effects and Photoshop, I bring technical precision and creative instinct to every frame. Certified by VfxEra in Graphics Designing and Video Editing.";
+const BIO_P1 = "I'm Akshat — an enthusiastic video editor who turns raw imaginations into visuals that feel real. Whether it's an AI-generated reel, a cinematic edit or a motion graphics piece, I bring energy and precision to every frame.";
+const BIO_P2 = "Armed with Adobe Premiere Pro, After Effects, Photoshop and cutting-edge AI tools like Kling AI, Veo and Seadance — I don't just edit videos, I craft experiences.";
 
 /* ─── Animation constants ───────────────────────────────────── */
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -275,13 +275,14 @@ export default function About() {
             animate={show}
             className="mb-10"
           >
-            <div className="relative w-full max-w-[400px]">
+            <div className="relative" style={{ width: '320px' }}>
               {/* Decoration line behind photo */}
-              <div className="absolute -right-3 -bottom-3 w-[400px] h-[500px] border-2 border-gold/30 pointer-events-none" />
+              <div className="absolute -right-3 -bottom-3 border-2 border-gold/30 pointer-events-none" style={{ width: '320px', height: '400px' }} />
 
               {/* Photo container */}
               <motion.div
-                className="relative w-full h-[500px] overflow-hidden border-r-2 border-b-2 border-gold group"
+                className="relative overflow-hidden border-r-2 border-b-2 border-gold group"
+                style={{ width: '320px', height: '400px', maxWidth: '320px' }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
@@ -289,7 +290,7 @@ export default function About() {
                 <img
                   src="https://res.cloudinary.com/dxenbzden/image/upload/v1779350767/profile_twpkgt.png"
                   alt="Akshat Tiwari"
-                  className="w-full h-full object-cover object-top"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                 />
               </motion.div>
             </div>
@@ -320,7 +321,7 @@ export default function About() {
             className="flex flex-col gap-3"
           >
             {[
-              { icon: MapPin, text: "Unnao / Kanpur, Uttar Pradesh" },
+              { icon: MapPin, text: "New Delhi, India" },
               { icon: Mail, text: "tiwariakshatofficial@gmail.com", href: "mailto:tiwariakshatofficial@gmail.com" },
               { icon: Phone, text: "6306229563", href: "tel:6306229563" },
             ].map(({ icon: Icon, text, href }) => (

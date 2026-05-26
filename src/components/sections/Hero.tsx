@@ -121,15 +121,15 @@ export default function Hero() {
         {/* ── Main content ── */}
         <div className="relative z-[3] w-full pl-6 md:pl-16 lg:pl-24 pr-6 pt-24 pb-32">
 
-          {/* Label */}
+          {/* Label — replaced with subtle gold dot */}
           <motion.p
-            className="font-inter text-xs tracking-[0.3em] text-gold mb-6 uppercase"
+            className="font-inter text-xs tracking-[0.3em] text-gold mb-6"
             variants={fadeUpVariants}
             custom={0.1}
             initial="hidden"
             animate={animateState}
           >
-            — VIDEO EDITOR —
+            ·
           </motion.p>
 
           {/* Name — always animates, not gated on isInView */}
@@ -142,33 +142,23 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Company / role */}
+          {/* Tagline */}
           <motion.p
-            className="font-inter text-sm tracking-[0.2em] text-foreground/50 uppercase mb-4"
+            className="font-inter text-lg md:text-xl text-foreground/70 italic mb-10 max-w-md"
+            style={{ color: '#F5F0E8', opacity: 0.7 }}
             variants={fadeUpVariants}
             custom={0.9}
             initial="hidden"
             animate={animateState}
           >
-            Junior Video Editor &nbsp;·&nbsp; Ritz Media World, Noida
-          </motion.p>
-
-          {/* Tagline */}
-          <motion.p
-            className="font-inter text-lg text-foreground/70 italic mb-10 max-w-md"
-            variants={fadeUpVariants}
-            custom={1.0}
-            initial="hidden"
-            animate={animateState}
-          >
-            Crafting stories frame by frame
+            Enthusiastic video editor turning imaginations into visuals that feel real
           </motion.p>
 
           {/* CTA buttons */}
           <motion.div
             className="flex flex-wrap gap-4"
             variants={fadeUpVariants}
-            custom={1.15}
+            custom={1.05}
             initial="hidden"
             animate={animateState}
           >

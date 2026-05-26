@@ -138,11 +138,8 @@ export default function WorkPreview() {
                                 </div>
                             </div>
 
-                            {/* Title and caption */}
+                            {/* Caption only — title removed */}
                             <div className="mt-4">
-                                <p className="font-heading font-medium text-lg text-foreground">
-                                    {project.title}
-                                </p>
                                 {project.caption && (
                                     <p className="font-inter text-sm text-foreground/60 mt-2">
                                         {project.caption}

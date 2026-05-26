@@ -205,8 +205,7 @@ function CarouselCard({
     >
       {/* Thumbnail */}
       <div
-        className="group relative w-full aspect-video bg-[#111] border border-[#2A2A2A] overflow-hidden cursor-none hover:border-gold transition-colors duration-200"
-        data-cursor="play"
+        className="group relative w-full aspect-video bg-[#111] border border-[#2A2A2A] overflow-hidden cursor-pointer hover:border-gold transition-colors duration-200"
         onClick={onClick}
       >
         {!imgError ? (

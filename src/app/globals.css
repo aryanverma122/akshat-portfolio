@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Hide default cursor globally ─────────────────────────── */
-html,
-body,
-a,
-button,
-[role="button"],
-input,
-label,
-select,
-textarea,
-[tabindex] {
-  cursor: none !important;
-}
-
-/* Keep cursor inside iframes (video player controls need it) */
-
 /* ─── CSS Variables ─────────────────────────────────────────── */
 :root {
   --background: #0A0A0A;

@@ -120,8 +120,7 @@ function VideoCard({ project, index, onClick }: { project: Project; index: numbe
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="group relative cursor-none"
-            data-cursor="play"
+            className="group relative cursor-pointer"
             onClick={onClick}
         >
             {/* Thumbnail */}
@@ -172,11 +171,8 @@ function VideoCard({ project, index, onClick }: { project: Project; index: numbe
                 )}
             </div>
 
-            {/* Title and Caption */}
+            {/* Caption only — title removed */}
             <div className="mt-3 px-0.5">
-                <p className="font-heading font-medium text-sm text-foreground/80 tracking-wide group-hover:text-gold transition-colors duration-200">
-                    {project.title}
-                </p>
                 {project.caption && (
                     <p className="font-inter text-sm text-foreground/60 mt-1 truncate">
                         {project.caption}

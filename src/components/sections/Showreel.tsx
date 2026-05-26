@@ -1,26 +1,18 @@
 "use client";
 
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import VideoGrid from "./VideoGrid";
 
 /* ─── Pull videos from centralized data ────────────────────── */
-const toVideoItem = (p: (typeof projects)[number]) => ({
+const toVideoItem = (p: Project) => ({
   id: p.publicId,
   title: p.title,
-  caption: "caption" in p ? (p.caption as string) : undefined,
+  caption: p.caption,
   thumb: p.thumbnail,
 });
 
-// Cast category to string to avoid `as const` narrowing errors
 const byCategory = (cat: string) =>
-  (projects as readonly { category: string; publicId: string; title: string; thumbnail: string; [key: string]: unknown }[])
-    .filter((p) => p.category === cat)
-    .map((p) => ({
-      id: p.publicId as string,
-      title: p.title as string,
-      caption: typeof p.caption === "string" ? p.caption : undefined,
-      thumb: p.thumbnail as string,
-    }));
+  projects.filter((p) => p.category === cat).map(toVideoItem);
 
 const AI_VIDEOS = byCategory("ai");
 const EDITED_VIDEOS = byCategory("edited");
